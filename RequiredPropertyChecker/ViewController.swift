@@ -66,7 +66,7 @@ class ViewController: UIViewController
     
     @IBAction func onRemovePropertyAction(_ obj: AnyObject)
     {
-        _ = self.propertyChecker.remove(self.switchView)
+      //  _ = self.propertyChecker.remove(self.switchView)
     }
     
     @IBAction func onClearPropertyAction(_ obj: AnyObject)

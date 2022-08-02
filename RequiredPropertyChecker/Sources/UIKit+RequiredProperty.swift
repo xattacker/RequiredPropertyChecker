@@ -19,7 +19,7 @@ extension UITextField: RequiredProperty
         return (self.text?.count ?? 0) > 0
     }
     
-    public var isFilledPublished: Published<Bool>.Publisher
+    public var isFilledPublisher: AnyPublisher<Bool, Never>
     {
         return self.publisher(for: \.text).map { ($0?.count ?? 0) > 0 }.eraseToAnyPublisher()
     }
