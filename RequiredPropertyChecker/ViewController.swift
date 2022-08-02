@@ -31,23 +31,21 @@ class ViewController: UIViewController
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
  
-        self.propertyChecker.add(self.textFiled, self.textView, self.switchView, self.segmentCtrl)
-        
-        self.propertyChecker.rx.isFilled.map { $0 ? "isAllFilled" : "notAllFilled" }
-                             .drive(self.isFilledLabel.rx.text)
-                             .disposed(by: self.disposeBag)
-        
-        self.propertyChecker.rx.isFilled.map { $0 ? UIColor.blue : UIColor.red }
-                             .drive(self.isFilledLabel.rx.textColor)
-                             .disposed(by: self.disposeBag)
-        
+//        self.propertyChecker.add(self.textFiled, self.textView, self.switchView, self.segmentCtrl)
+//        
+//        self.propertyChecker.rx.isFilled.map { $0 ? "isAllFilled" : "notAllFilled" }
+//                             .drive(self.isFilledLabel.rx.text)
+//                             .disposed(by: self.disposeBag)
+//        
+//        self.propertyChecker.rx.isFilled.map { $0 ? UIColor.blue : UIColor.red }
+//                             .drive(self.isFilledLabel.rx.textColor)
+//                             .disposed(by: self.disposeBag)
+//        
         weather.$value
             .receive(on: RunLoop.main)
             .sink { v in
             print("value \(v)")
         }.store(in: &set)
-        
-        weather.$value.ass
     }
     
     private let weather = Weather()

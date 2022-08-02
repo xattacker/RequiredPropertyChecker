@@ -10,15 +10,16 @@ import Foundation
 import Combine
 
 
-class Weather
+class Weather: WeatherP
 {
     @Published
     var value: Int?
+    
+    var valueBinding: Published<Int?>.Publisher { $value }
 }
 
 
-//protocol WeatherP
-//{
-//    @Published
-//    var value: Int { get }
-//}
+protocol WeatherP
+{
+    var valueBinding: Published<Int?>.Publisher { get }
+}

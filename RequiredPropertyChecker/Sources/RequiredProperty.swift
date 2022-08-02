@@ -16,7 +16,7 @@ public protocol RequiredProperty: AnyObject
 {
     var propertyName: String { get }
     var isFilled: Bool { get }
-    var isFilledBinding: Driver<Bool> { get }
+    var isFilledPublished: Published<Bool>.Publisher { get }
     var isRequired: Bool { get }
 }
 
@@ -38,6 +38,6 @@ extension Array where Element == AnyObject
 {
     func getRequiredProperties() -> [RequiredProperty]
     {
-        return self.filter { $0 is RequiredProperty }.map { $0 as! RequiredProperty }
+        return self.filter { $0 is RequiredProperty }.map { $0 as! RequiredPropertyV2 }
     }
 }
