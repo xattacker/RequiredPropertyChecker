@@ -6,7 +6,8 @@
 //  Copyright © 2021 xattacker. All rights reserved.
 //
 
-import UIKit
+import Foundation
+import Combine
 import RxSwift
 import RxCocoa
 
@@ -84,6 +85,7 @@ public final class RequiredPropertyChecker: ReactiveCompatible
     
     private var properties = [WeakPropertyBox]()
     private var disposeBag = DisposeBag()
+    private var set = Set<AnyCancellable>()
     fileprivate let isFilledSubject = BehaviorSubject(value: true)
     
     public init(checkMode: RequiredPropertyCheckMode = .all)
