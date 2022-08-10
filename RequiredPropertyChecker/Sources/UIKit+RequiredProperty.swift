@@ -8,8 +8,6 @@
 
 import UIKit
 import Combine
-import RxSwift
-import RxCocoa
 
 
 extension UITextField: RequiredProperty

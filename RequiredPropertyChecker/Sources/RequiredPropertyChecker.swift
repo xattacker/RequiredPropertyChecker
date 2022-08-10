@@ -8,8 +8,6 @@
 
 import Foundation
 import Combine
-import RxSwift
-import RxCocoa
 
 
 // 填滿條件判斷定義
@@ -18,17 +16,17 @@ public enum RequiredPropertyCheckMode
     /// 全都要填
     case all
     
-    /// 只要有一個有填
-    case contained
+    /// 只要有一定數量有填
+    case contained(count: Int)
 }
 
 
-public final class RequiredPropertyChecker: ReactiveCompatible
+public final class RequiredPropertyChecker
 {
     private class WeakPropertyBox
     {
         fileprivate weak var property: RequiredProperty!
-        fileprivate var disposable: Disposable?
+        fileprivate var cancellable: AnyCancellable?
         
         init(property: RequiredProperty)
         {
@@ -54,7 +52,10 @@ public final class RequiredPropertyChecker: ReactiveCompatible
         return self.properties.isEmpty
     }
     
-    public var isFilled: Bool
+    @Published
+    public var isFilled: Bool = false
+    
+    private var isFilledPri: Bool
     {
         if !self.properties.isEmpty
         {
@@ -67,8 +68,9 @@ public final class RequiredPropertyChecker: ReactiveCompatible
                     }
                     break
                 
-                case .contained:
-                    return self.properties.first(where: { $0.property != nil && $0.property.isRequired && $0.property.isFilled }) != nil
+                case .contained(let count):
+                    let filled = self.properties.filter { $0.property != nil && $0.property.isRequired && $0.property.isFilled }
+                    return filled.count >= count
             }
             
             return true
@@ -84,9 +86,7 @@ public final class RequiredPropertyChecker: ReactiveCompatible
     }
     
     private var properties = [WeakPropertyBox]()
-    private var disposeBag = DisposeBag()
     private var set = Set<AnyCancellable>()
-    fileprivate let isFilledSubject = BehaviorSubject(value: true)
     
     public init(checkMode: RequiredPropertyCheckMode = .all)
     {
@@ -123,7 +123,7 @@ public final class RequiredPropertyChecker: ReactiveCompatible
         
         if result
         {
-            self.isFilledSubject.onNext(self.isFilled)
+            self.isFilled = self.isFilledPri
         }
         
         return result
@@ -143,7 +143,7 @@ public final class RequiredPropertyChecker: ReactiveCompatible
         
         if result
         {
-            self.isFilledSubject.onNext(self.isFilled)
+            self.isFilled = self.isFilledPri
         }
         
         return result
@@ -152,13 +152,13 @@ public final class RequiredPropertyChecker: ReactiveCompatible
     public func clear()
     {
         self.properties.removeAll()
-        self.disposeBag = DisposeBag()
-        self.isFilledSubject.onNext(self.isFilled)
+        self.set = Set<AnyCancellable>()
+        self.isFilled = self.isFilledPri
     }
     
     public func check()
     {
-        self.isFilledSubject.onNext(self.isFilled)
+        self.isFilled = self.isFilledPri
     }
     
     public func fetch(_ each: (_ proerty: RequiredProperty) -> Void)
@@ -197,15 +197,13 @@ extension RequiredPropertyChecker
         let box = WeakPropertyBox(property: property)
         self.properties.append(box)
         
-        let disposable = property.isFilledBinding.drive(
-                            onNext: {
-                                [weak self]
-                                (filled: Bool) in
-                                self?.isFilledSubject.onNext(self?.isFilled ?? false)
-                            })
-        disposable.disposed(by: self.disposeBag)
-        
-        box.disposable = disposable
+        let cancellable = property.isFilledPublisher.sink {
+                            [weak self]
+                            filled in
+                            self?.isFilled = self?.isFilledPri ?? false
+                        }
+        cancellable.store(in: &self.set)
+        box.cancellable = cancellable
     }
     
     private func disposeProperty(_ property: RequiredProperty) -> Bool
@@ -215,7 +213,7 @@ extension RequiredPropertyChecker
         if let index = self.properties.firstIndex(where:{ $0.property === property })
         {
             let existed = self.properties[index]
-            existed.disposable?.dispose()
+            existed.cancellable?.cancel()
             self.properties.remove(at: index)
             result = true
         }

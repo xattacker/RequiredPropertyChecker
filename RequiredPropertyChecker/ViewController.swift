@@ -8,8 +8,6 @@
 
 import UIKit
 import Combine
-import RxSwift
-import RxCocoa
 
 
 class ViewController: UIViewController
@@ -22,8 +20,7 @@ class ViewController: UIViewController
     @IBOutlet private weak var isFilledLabel: UILabel!
     
     private let propertyChecker = RequiredPropertyChecker()
-    private let disposeBag = DisposeBag()
-    
+
     private var set = Set<AnyCancellable>()
     
     override func viewDidLoad()
@@ -31,8 +28,8 @@ class ViewController: UIViewController
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
  
-//        self.propertyChecker.add(self.textFiled, self.textView, self.switchView, self.segmentCtrl)
-//        
+        self.propertyChecker.add(self.textFiled)//, self.textView, self.switchView, self.segmentCtrl)
+        
 //        self.propertyChecker.rx.isFilled.map { $0 ? "isAllFilled" : "notAllFilled" }
 //                             .drive(self.isFilledLabel.rx.text)
 //                             .disposed(by: self.disposeBag)
@@ -40,7 +37,14 @@ class ViewController: UIViewController
 //        self.propertyChecker.rx.isFilled.map { $0 ? UIColor.blue : UIColor.red }
 //                             .drive(self.isFilledLabel.rx.textColor)
 //                             .disposed(by: self.disposeBag)
-//        
+//
+        
+        self.propertyChecker.$isFilled.sink {
+            [weak self]
+            filled in
+            self?.isFilledLabel.text = filled ? "isAllFilled" : "notAllFilled"
+        }.store(in: &set)
+        
         weather.$value
             .receive(on: RunLoop.main)
             .sink { v in

@@ -8,8 +8,6 @@
 
 import Foundation
 import Combine
-import RxSwift
-import RxCocoa
 
 
 public protocol RequiredProperty: AnyObject
