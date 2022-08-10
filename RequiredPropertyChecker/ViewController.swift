@@ -38,12 +38,19 @@ class ViewController: UIViewController
 //                             .drive(self.isFilledLabel.rx.textColor)
 //                             .disposed(by: self.disposeBag)
 //
+        self.propertyChecker.$isFilled.map { $0 ? "isAllFilled" : "notAllFilled" }
+            .sink {
+                [weak self]
+                text in
+                self?.isFilledLabel.text = text
+            }.store(in: &set)
         
-        self.propertyChecker.$isFilled.sink {
-            [weak self]
-            filled in
-            self?.isFilledLabel.text = filled ? "isAllFilled" : "notAllFilled"
-        }.store(in: &set)
+        self.propertyChecker.$isFilled.map { $0 ? UIColor.blue : UIColor.red }
+            .sink {
+                [weak self]
+                color in
+                self?.isFilledLabel.textColor = color
+            }.store(in: &set)
         
         weather.$value
             .receive(on: RunLoop.main)
