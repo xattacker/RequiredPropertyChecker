@@ -19,7 +19,13 @@ extension UITextField: RequiredProperty
     
     public var isFilledPublisher: AnyPublisher<Bool, Never>
     {
-        return self.publisher(for: \.text).map { ($0?.count ?? 0) > 0 }.eraseToAnyPublisher()
+        let p1 = NotificationCenter.default
+                   .publisher(for: UITextField.textDidChangeNotification, object: self)
+                   .map { (($0.object as? UITextField)?.text?.count ?? 0) > 0 }
+
+        let p2 = self.publisher(for: \.text).map { ($0?.count ?? 0) > 0 }
+        
+        return Publishers.Merge(p1, p2).eraseToAnyPublisher()
     }
 }
 

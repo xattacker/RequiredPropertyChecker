@@ -197,11 +197,13 @@ extension RequiredPropertyChecker
         let box = WeakPropertyBox(property: property)
         self.properties.append(box)
         
-        let cancellable = property.isFilledPublisher.sink {
-                            [weak self]
-                            filled in
-                            self?.isFilled = self?.isFilledPri ?? false
-                        }
+        let cancellable = property.isFilledPublisher
+                            .receive(on: RunLoop.main)
+                            .sink {
+                                [weak self]
+                                filled in
+                                self?.isFilled = self?.isFilledPri ?? false
+                            }
         cancellable.store(in: &self.set)
         box.cancellable = cancellable
     }
