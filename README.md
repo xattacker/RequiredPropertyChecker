@@ -1,5 +1,5 @@
-# RxRequiredPropertyChecker
-a RxSwift Related component, help checking property has been filled
+# RequiredPropertyChecker
+a Swift Combine Related component, help checking property has been filled
 
 
 https://user-images.githubusercontent.com/33754378/131239984-9138ccfd-5525-4584-8b8c-712079140315.mp4
@@ -8,49 +8,58 @@ https://user-images.githubusercontent.com/33754378/131239984-9138ccfd-5525-4584-
 # Installation
 
 ### Cocoapods
-RxRequiredPropertyChecker can be added to your project using CocoaPods 0.36 or later by adding the following line to your Podfile:
+RequiredPropertyChecker can be added to your project using CocoaPods 0.36 or later by adding the following line to your Podfile:
 ```
-pod 'RxSwift'
-pod 'RxCocoa'
-pod 'RxRequiredPropertyChecker'
+pod 'RequiredPropertyChecker'
 ```
 
 ### Swift Package Manager
-To add RxRequiredPropertyChecker to a [Swift Package Manager](https://swift.org/package-manager/) based project, add:
+To add RequiredPropertyChecker to a [Swift Package Manager](https://swift.org/package-manager/) based project, add:
 
 ```swift
-.package(url: "https://github.com/xattacker/RxRequiredPropertyChecker.git", .upToNextMajor(from: "1.1.0")),
-.package(url: "https://github.com/ReactiveX/RxSwift.git", .upToNextMajor(from: "6.0.0")),
+.package(url: "https://github.com/xattacker/RequiredPropertyChecker.git", .upToNextMajor(from: "1.0.0")),
 ```
 to your `Package.swift` files `dependencies` array.
 
 
 ### How to use:
 ``` 
-import RxRequiredPropertyChecker
+import RequiredPropertyChecker
+import Combine
 
 // make the component implement protocol RequiredProperty
 extension UITextField: RequiredProperty
 {
     public var isFilled: Bool
     {
-	return (self.text?.count ?? 0) > 0
+        return (self.text?.count ?? 0) > 0
     }
 
-    public var isFilledBinding: Driver<Bool>
+    public var isFilledPublisher: AnyPublisher<Bool, Never>
     {
-	return self.rx.text.map { $0?.count ?? 0 > 0 }.asDriver(onErrorJustReturn: false)
+        let p1 = NotificationCenter.default
+                   .publisher(for: UITextField.textDidChangeNotification, object: self)
+                   .map { (($0.object as? UITextField)?.text?.count ?? 0) > 0 }
+
+        let p2 = self.publisher(for: \.text).map { ($0?.count ?? 0) > 0 }
+
+        return p1.merge(with: p2).eraseToAnyPublisher()
     }
 }
 
 
 // then add the component instance into RxRequiredPropertyChecker
 let textField: UITextField
-
-let checker = RxRequiredPropertyChecker()
+var set = Set<AnyCancellable>()
+    
+let checker = RequiredPropertyChecker()
 checker.add(textField)
 
 // bind checker with other
-checker.rx.isFilled.drive(self.button.rx.isEnable)
-		   .disposed(by: self.disposeBag)
+checker.$isFilled           
+            .sink {
+                [weak self]
+                filled in
+                self?.button.isEnable = filled
+            }.store(in: &set)
 ``` 
