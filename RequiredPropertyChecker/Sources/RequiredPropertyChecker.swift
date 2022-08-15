@@ -97,7 +97,7 @@ public final class RequiredPropertyChecker
     {
         for p in properties
         {
-            self.driveProperty(p)
+            self.sinkProperty(p)
         }
     }
     
@@ -105,7 +105,7 @@ public final class RequiredPropertyChecker
     {
         for p in properties
         {
-            self.driveProperty(p)
+            self.sinkProperty(p)
         }
     }
     
@@ -115,7 +115,7 @@ public final class RequiredPropertyChecker
         
         for p in properties
         {
-            if self.disposeProperty(p)
+            if self.cancelProperty(p)
             {
                 result = true
             }
@@ -135,7 +135,7 @@ public final class RequiredPropertyChecker
         
         for p in properties
         {
-            if self.disposeProperty(p)
+            if self.cancelProperty(p)
             {
                 result = true
             }
@@ -192,7 +192,7 @@ public final class RequiredPropertyChecker
 
 extension RequiredPropertyChecker
 {
-    private func driveProperty(_ property: RequiredProperty)
+    private func sinkProperty(_ property: RequiredProperty)
     {
         let box = WeakPropertyBox(property: property)
         self.properties.append(box)
@@ -208,7 +208,7 @@ extension RequiredPropertyChecker
         box.cancellable = cancellable
     }
     
-    private func disposeProperty(_ property: RequiredProperty) -> Bool
+    private func cancelProperty(_ property: RequiredProperty) -> Bool
     {
         var result = false
         
