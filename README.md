@@ -52,7 +52,7 @@ extension UITextField: RequiredProperty
 }
 
 
-// then add the component instance into RxRequiredPropertyChecker
+// then add the component instance into RequiredPropertyChecker
 let textField: UITextField
 var set = Set<AnyCancellable>()
     
