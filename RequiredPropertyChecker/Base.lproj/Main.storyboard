@@ -12,7 +12,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="RxRequiredPropertyChecker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="RequiredPropertyChecker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -79,10 +79,19 @@
                                     <action selector="onTextViewAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RCV-XO-xHa"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CDF-hE-tJX">
+                                <rect key="frame" x="306" y="154.5" width="49" height="30"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="FillItem"/>
+                                <connections>
+                                    <action selector="onFillMyItemAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VKQ-i4-h4V"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="CDF-hE-tJX" firstAttribute="centerY" secondItem="PS4-O2-Aq4" secondAttribute="centerY" id="3dP-XQ-MUd"/>
                             <constraint firstItem="PS4-O2-Aq4" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.3" id="4nx-98-62f"/>
                             <constraint firstItem="7k3-Xc-Oe5" firstAttribute="top" secondItem="FzQ-Ak-IbT" secondAttribute="bottom" constant="20" id="6ut-vV-iga"/>
                             <constraint firstItem="FzQ-Ak-IbT" firstAttribute="leading" secondItem="GLq-Dd-dGu" secondAttribute="leading" id="79E-aS-AxS"/>
@@ -104,6 +113,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="DcA-mu-efn" secondAttribute="trailing" constant="20" id="mDs-LU-4qR"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="6lJ-yc-GcY" secondAttribute="trailing" constant="20" id="mH2-Bg-d6l"/>
                             <constraint firstItem="8Oe-6j-pYN" firstAttribute="leading" secondItem="d9M-lJ-dXm" secondAttribute="leading" id="pL5-5t-Dfp"/>
+                            <constraint firstItem="CDF-hE-tJX" firstAttribute="trailing" secondItem="J7a-XF-RZS" secondAttribute="trailing" id="qmd-28-ZCK"/>
                             <constraint firstItem="PS4-O2-Aq4" firstAttribute="centerY" secondItem="FzQ-Ak-IbT" secondAttribute="centerY" id="qpI-jF-8er"/>
                             <constraint firstItem="8Oe-6j-pYN" firstAttribute="top" secondItem="7k3-Xc-Oe5" secondAttribute="bottom" constant="30" id="u0M-99-ATM"/>
                             <constraint firstItem="d9M-lJ-dXm" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="vcJ-q1-o7u"/>

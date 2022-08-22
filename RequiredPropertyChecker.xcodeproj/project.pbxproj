@@ -15,7 +15,7 @@
 		65E55A8426D00A3D00438949 /* RequiredPropertyChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E55A8326D00A3D00438949 /* RequiredPropertyChecker.swift */; };
 		65E55A8626D0102100438949 /* RequiredProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E55A8526D0102100438949 /* RequiredProperty.swift */; };
 		65E55A8826D019CC00438949 /* UIKit+RequiredProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E55A8726D019CC00438949 /* UIKit+RequiredProperty.swift */; };
-		C5C7B56C2896EC1400FB9CBD /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C7B56B2896EC1400FB9CBD /* Weather.swift */; };
+		C50B56D028B3136300D4FE52 /* MyTestItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50B56CF28B3136300D4FE52 /* MyTestItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,7 +29,7 @@
 		65E55A8326D00A3D00438949 /* RequiredPropertyChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequiredPropertyChecker.swift; sourceTree = "<group>"; };
 		65E55A8526D0102100438949 /* RequiredProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequiredProperty.swift; sourceTree = "<group>"; };
 		65E55A8726D019CC00438949 /* UIKit+RequiredProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIKit+RequiredProperty.swift"; sourceTree = "<group>"; };
-		C5C7B56B2896EC1400FB9CBD /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		C50B56CF28B3136300D4FE52 /* MyTestItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTestItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,7 +65,7 @@
 				68A40D022452C5D50032147E /* Sources */,
 				65A7E99E2038882C001CB20A /* AppDelegate.swift */,
 				65A7E9A02038882C001CB20A /* ViewController.swift */,
-				C5C7B56B2896EC1400FB9CBD /* Weather.swift */,
+				C50B56CF28B3136300D4FE52 /* MyTestItem.swift */,
 				65A7E9A22038882C001CB20A /* Main.storyboard */,
 				65A7E9A52038882C001CB20A /* Assets.xcassets */,
 				65A7E9A72038882C001CB20A /* LaunchScreen.storyboard */,
@@ -165,7 +165,7 @@
 				65A7E99F2038882C001CB20A /* AppDelegate.swift in Sources */,
 				65E55A8426D00A3D00438949 /* RequiredPropertyChecker.swift in Sources */,
 				65E55A8826D019CC00438949 /* UIKit+RequiredProperty.swift in Sources */,
-				C5C7B56C2896EC1400FB9CBD /* Weather.swift in Sources */,
+				C50B56D028B3136300D4FE52 /* MyTestItem.swift in Sources */,
 				65E55A8626D0102100438949 /* RequiredProperty.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

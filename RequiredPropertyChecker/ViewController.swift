@@ -19,6 +19,8 @@ class ViewController: UIViewController
     
     @IBOutlet private weak var isFilledLabel: UILabel!
     
+    private let myItem = MyTestItem()
+    
     private let propertyChecker = RequiredPropertyChecker()
 
     private var set = Set<AnyCancellable>()
@@ -28,7 +30,7 @@ class ViewController: UIViewController
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
  
-        self.propertyChecker.add(self.textFiled, self.textView, self.switchView, self.segmentCtrl)
+        self.propertyChecker.add(self.textFiled, self.textView, self.switchView, self.segmentCtrl, self.myItem)
         
         self.propertyChecker.$isFilled.map { $0 ? "isAllFilled" : "notAllFilled" }
             .sink {
@@ -65,5 +67,10 @@ class ViewController: UIViewController
     @IBAction func onClearPropertyAction(_ obj: AnyObject)
     {
         self.propertyChecker.clear()
+    }
+    
+    @IBAction func onFillMyItemAction(_ obj: AnyObject)
+    {
+        self.myItem.text = "11123"
     }
 }
