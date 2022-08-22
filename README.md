@@ -6,7 +6,7 @@ another congeneric project: https://github.com/xattacker/RxRequiredPropertyCheck
 
 # Demo Video
 
-https://user-images.githubusercontent.com/33754378/185822423-5d2b7349-0969-49dd-8fbf-2f3187b1059f.mp4
+https://user-images.githubusercontent.com/33754378/185822595-a259f689-4b87-48d2-9416-7f23dd29ea7d.mp4
 
 
 
