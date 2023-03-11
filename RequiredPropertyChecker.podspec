@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'RequiredPropertyChecker'
-  s.version = '1.0.0'
+  s.version = '1.0.1'
   s.license = 'MIT'
   s.summary = 'a Swift Combine Related component'
   s.homepage = 'https://github.com/xattacker/RequiredPropertyChecker'

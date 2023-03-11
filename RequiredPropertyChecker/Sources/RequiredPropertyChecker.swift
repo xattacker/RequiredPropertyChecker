@@ -79,10 +79,10 @@ public final class RequiredPropertyChecker
         return true
     }
     
-    public var nonFilledPropertyNames: [String]
+    public var unfilledProperties: [RequiredProperty]
     {
         return self.properties.filter { $0.property.isRequired && !$0.property.isFilled }
-                              .map { $0.property.propertyName }
+                              .map { $0.property }
     }
     
     private var properties = [WeakPropertyBox]()
