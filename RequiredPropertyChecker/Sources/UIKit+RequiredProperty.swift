@@ -39,7 +39,13 @@ extension UITextView: RequiredProperty
     
     public var isFilledPublisher: AnyPublisher<Bool, Never>
     {
-        return self.publisher(for: \.text).map { ($0?.count ?? 0) > 0 }.eraseToAnyPublisher()
+        let p1 = NotificationCenter.default
+                    .publisher(for: UITextView.textDidChangeNotification, object: self)
+                    .map { (($0.object as? UITextView)?.text?.count ?? 0) > 0 }
+        
+        let p2 = self.publisher(for: \.text).map { ($0?.count ?? 0) > 0 }
+        
+        return p1.merge(with: p2).eraseToAnyPublisher()
     }
 }
 
