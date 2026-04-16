@@ -53,7 +53,7 @@ public final class RequiredPropertyChecker
     }
     
     @Published
-    public var isFilled: Bool = false
+    public private(set) var isFilled: Bool = false
     
     private var isFilledPri: Bool
     {
