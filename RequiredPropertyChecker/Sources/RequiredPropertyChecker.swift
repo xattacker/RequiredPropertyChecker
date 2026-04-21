@@ -57,26 +57,26 @@ public final class RequiredPropertyChecker
     
     private var isFilledPri: Bool
     {
-        if !self.properties.isEmpty
+        if self.properties.isEmpty
         {
-            switch self.checkMode
-            {
-                case .all:
-                    if let _ = self.properties.first(where: { $0.property != nil && $0.property.isRequired && !$0.property.isFilled })
-                    {
-                        return false
-                    }
-                    break
-                
-                case .contained(let count):
-                    let filled = self.properties.filter { $0.property != nil && $0.property.isRequired && $0.property.isFilled }
-                    return filled.count >= (self.properties.count > count ? count : self.properties.count)
-            }
-            
             return true
         }
         
-        return true
+        switch self.checkMode
+        {
+            case .all:
+                if let _ = self.properties.first(where: { $0.property != nil && $0.property.isRequired && !$0.property.isFilled })
+                {
+                    return false
+                }
+                break
+            
+            case .contained(let count):
+                let filled = self.properties.filter { $0.property != nil && $0.property.isRequired && $0.property.isFilled }
+                return filled.count >= (self.properties.count > count ? count : self.properties.count)
+        }
+            
+        return false
     }
     
     public var unfilledProperties: [RequiredProperty]
@@ -91,6 +91,7 @@ public final class RequiredPropertyChecker
     public init(checkMode: RequiredPropertyCheckMode = .all)
     {
         self.checkMode = checkMode
+        self.isFilled = self.isFilledPri
     }
 
     public func add(_ properties: RequiredProperty...)
@@ -99,6 +100,8 @@ public final class RequiredPropertyChecker
         {
             self.sinkProperty(p)
         }
+        
+        self.isFilled = self.isFilledPri
     }
     
     public func add(_ properties: [RequiredProperty])
@@ -107,6 +110,8 @@ public final class RequiredPropertyChecker
         {
             self.sinkProperty(p)
         }
+        
+        self.isFilled = self.isFilledPri
     }
     
     @discardableResult
