@@ -76,7 +76,7 @@ public final class RequiredPropertyChecker
                 return filled.count >= (self.properties.count > count ? count : self.properties.count)
         }
             
-        return false
+        return true
     }
     
     public var unfilledProperties: [RequiredProperty]

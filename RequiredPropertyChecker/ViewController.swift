@@ -37,6 +37,9 @@ class ViewController: UIViewController
                 [weak self]
                 text in
                 self?.isFilledLabel.text = text
+                
+                let unfilled = self?.propertyChecker.unfilledProperties
+                print(unfilled)
             }.store(in: &set)
         
         self.propertyChecker.$isFilled.map { $0 ? UIColor.blue : UIColor.red }
