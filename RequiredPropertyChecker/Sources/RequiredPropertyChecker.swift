@@ -109,6 +109,7 @@ public final class RequiredPropertyChecker
         }
     }
     
+    @discardableResult
     public func remove(_ properties: RequiredProperty...) -> Bool
     {
         var result = false
@@ -129,6 +130,7 @@ public final class RequiredPropertyChecker
         return result
     }
     
+    @discardableResult
     public func remove(_ properties: [RequiredProperty]) -> Bool
     {
         var result = false
