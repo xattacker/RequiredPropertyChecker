@@ -25,7 +25,7 @@ extension UITextField: RequiredProperty
 
         let p2 = self.publisher(for: \.text).map { ($0?.count ?? 0) > 0 }
 
-        return p1.merge(with: p2).eraseToAnyPublisher()
+        return p1.merge(with: p2).removeDuplicates().eraseToAnyPublisher()
     }
 }
 
@@ -45,7 +45,7 @@ extension UITextView: RequiredProperty
         
         let p2 = self.publisher(for: \.text).map { ($0?.count ?? 0) > 0 }
         
-        return p1.merge(with: p2).eraseToAnyPublisher()
+        return p1.merge(with: p2).removeDuplicates().eraseToAnyPublisher()
     }
 }
 
