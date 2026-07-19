@@ -12,17 +12,12 @@ https://user-images.githubusercontent.com/33754378/185822595-a259f689-4b87-48d2-
 
 # Installation
 
-### Cocoapods
-RequiredPropertyChecker can be added to your project using CocoaPods 0.36 or later by adding the following line to your Podfile:
-```
-pod 'RequiredPropertyChecker'
-```
 
 ### Swift Package Manager
 To add RequiredPropertyChecker to a [Swift Package Manager](https://swift.org/package-manager/) based project, add:
 
 ```swift
-.package(url: "https://github.com/xattacker/RequiredPropertyChecker.git", .upToNextMajor(from: "1.0.1")),
+.package(url: "https://github.com/xattacker/RequiredPropertyChecker.git", .upToNextMajor(from: "1.1.0")),
 ```
 to your `Package.swift` files `dependencies` array.
 
