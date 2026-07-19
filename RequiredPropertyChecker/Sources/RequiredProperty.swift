@@ -10,6 +10,7 @@ import Foundation
 import Combine
 
 
+@MainActor
 public protocol RequiredProperty: AnyObject
 {
     var propertyName: String { get }

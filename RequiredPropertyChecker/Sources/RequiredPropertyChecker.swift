@@ -21,6 +21,7 @@ public enum RequiredPropertyCheckMode
 }
 
 
+@MainActor
 public final class RequiredPropertyChecker
 {
     private class WeakPropertyBox
