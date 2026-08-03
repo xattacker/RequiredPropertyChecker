@@ -10,7 +10,7 @@ import UIKit
 import Combine
 
 
-extension UITextField: RequiredProperty
+extension UITextField: @MainActor RequiredProperty
 {
     public var isFilled: Bool
     {
@@ -30,7 +30,7 @@ extension UITextField: RequiredProperty
 }
 
 
-extension UITextView: RequiredProperty
+extension UITextView: @MainActor RequiredProperty
 {
     public var isFilled: Bool
     {
@@ -50,7 +50,7 @@ extension UITextView: RequiredProperty
 }
 
 
-extension UIButton: RequiredProperty
+extension UIButton: @MainActor RequiredProperty
 {
     public var propertyName: String
     {
@@ -69,7 +69,7 @@ extension UIButton: RequiredProperty
 }
 
 
-extension UISwitch: RequiredProperty
+extension UISwitch: @MainActor RequiredProperty
 {
     public var propertyName: String
     {
@@ -93,7 +93,7 @@ extension UISwitch: RequiredProperty
 }
 
 
-extension UISegmentedControl: RequiredProperty
+extension UISegmentedControl: @MainActor RequiredProperty
 {
     public var isFilled: Bool
     {
