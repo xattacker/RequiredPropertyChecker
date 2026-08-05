@@ -65,7 +65,7 @@ public final class RequiredPropertyChecker
         switch self.checkMode
         {
             case .all:
-                if let _ = self.properties.first(where: { $0.property != nil && $0.property.isRequired && !$0.property.isFilled })
+                if self.properties.first(where: { $0.property != nil && $0.property.isRequired && !$0.property.isFilled }) != nil
                 {
                     return false
                 }
